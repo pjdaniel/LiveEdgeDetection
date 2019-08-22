@@ -130,8 +130,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         super.onResume();
 
         if (!OpenCVLoader.initDebug()) {
-            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, mLoaderCallback);
+            // Handle Error
         } else {
             Log.d(TAG, "OpenCV library found inside package. Using it!");
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);

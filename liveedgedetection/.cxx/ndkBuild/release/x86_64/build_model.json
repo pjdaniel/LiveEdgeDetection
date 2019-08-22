@@ -1,0 +1,60 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection",
+      "sdkFolder": "/Users/pjdaniel/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates",
+      "gradleModulePathName": ":liveedgedetection",
+      "moduleRootFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection",
+      "makeFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/opencv/native/jni/OpenCV.mk",
+      "buildSystem": "NDK_BUILD",
+      "compilerSettingsCacheFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/.cxx",
+      "cxxFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx",
+      "ndkFolder": "/Users/pjdaniel/Library/Android/sdk/ndk/20.0.5594570",
+      "ndkVersion": "20.0.5594570",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "release",
+    "soFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates/ndkBuild/release/lib",
+    "objFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates/ndkBuild/release/obj/local",
+    "jsonFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release",
+    "gradleBuildOutputFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/cxx/release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "X86_64",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64",
+  "jsonFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/cxx/release/x86_64",
+  "objFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates/ndkBuild/release/obj/local/x86_64",
+  "buildCommandFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/build_command.txt",
+  "buildOutputFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/build_output.txt",
+  "modelOutputFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/build_model.json",
+  "jsonGenerationLoggingRecordFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/.cxx/ndkBuild/release/x86_64/compile_commands.json"
+}

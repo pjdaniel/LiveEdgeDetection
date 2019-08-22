@@ -1,0 +1,74 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection",
+      "sdkFolder": "/Users/pjdaniel/Library/Android/sdk",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/build/intermediates",
+      "gradleModulePathName": ":openCV",
+      "moduleRootFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV",
+      "makeFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/libcxx_helper/CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/.cxx",
+      "cxxFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx",
+      "ndkFolder": "/Users/pjdaniel/Library/Android/sdk/ndk/20.0.5594570",
+      "ndkVersion": "20.0.5594570",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [
+      "-DANDROID_STL\u003dc++_shared"
+    ],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "debug",
+    "soFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/build/intermediates/cmake/debug/lib",
+    "objFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/build/intermediates/cmake/debug/obj",
+    "jsonFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug",
+    "gradleBuildOutputFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug",
+    "isDebuggableEnabled": true,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": [
+      "opencv_jni_shared"
+    ]
+  },
+  "abi": "ARM64_V8A",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a",
+  "jsonFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/android_gradle_build.json",
+  "gradleBuildOutputFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a",
+  "objFolder": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/build/intermediates/cmake/debug/obj/arm64-v8a",
+  "buildCommandFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/build_command.txt",
+  "buildOutputFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/build_output.txt",
+  "modelOutputFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/CMakeLists.txt",
+    "toolchainWrapperFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/build_generation_state.json",
+    "cacheKeyFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/compiler_cache_key.json",
+    "compilerCacheUseFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/compiler_cache_use.json",
+    "compilerCacheWriteFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cxx/debug/arm64-v8a/compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/json_generation_record.json",
+  "compileCommandsJsonFile": "/Users/pjdaniel/Documents/git/LiveEdgeDetection/openCV/.cxx/cmake/debug/arm64-v8a/compile_commands.json"
+}
