@@ -27,12 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        ndkBuild {
-            path file('../opencv/native/jni/OpenCV.mk')
-        }
-    }
-
 }
 
 dependencies {
