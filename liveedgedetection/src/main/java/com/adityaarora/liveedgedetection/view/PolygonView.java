@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,12 @@ import com.adityaarora.liveedgedetection.activity.ScanActivity;
 import com.adityaarora.liveedgedetection.util.ScanUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class defines polygon for cropping
  */
+@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public class PolygonView extends FrameLayout {
 
     private static final String TAG = PolygonView.class.getSimpleName();
@@ -106,7 +106,7 @@ public class PolygonView extends FrameLayout {
         circleFillPaint.setAntiAlias(true);
     }
 
-    public Map<Integer, PointF> getPoints() {
+    public SparseArray<PointF> getPoints() {
 
         List<PointF> points = new ArrayList<>();
         points.add(new PointF(pointer1.getX(), pointer1.getY()));
@@ -117,7 +117,7 @@ public class PolygonView extends FrameLayout {
         return getOrderedPoints(points);
     }
 
-    private Map<Integer, PointF> getOrderedPoints(List<PointF> points) {
+    private SparseArray<PointF> getOrderedPoints(List<PointF> points) {
 
         PointF centerPoint = new PointF();
         int size = points.size();
@@ -125,7 +125,7 @@ public class PolygonView extends FrameLayout {
             centerPoint.x += pointF.x / size;
             centerPoint.y += pointF.y / size;
         }
-        Map<Integer, PointF> orderedPoints = new HashMap<>();
+        SparseArray<PointF> orderedPoints = new SparseArray<>();
         for (PointF pointF : points) {
             int index = -1;
             if (pointF.x < centerPoint.x && pointF.y < centerPoint.y) {
@@ -142,13 +142,13 @@ public class PolygonView extends FrameLayout {
         return orderedPoints;
     }
 
-    public void setPoints(Map<Integer, PointF> pointFMap) {
+    public void setPoints(SparseArray<PointF> pointFMap) {
         if (pointFMap.size() == 4) {
             setPointsCoordinates(pointFMap);
         }
     }
 
-    private void setPointsCoordinates(Map<Integer, PointF> pointFMap) {
+    private void setPointsCoordinates(SparseArray<PointF> pointFMap) {
         pointer1.setX(pointFMap.get(0).x);
         pointer1.setY(pointFMap.get(0).y);
 
@@ -172,10 +172,10 @@ public class PolygonView extends FrameLayout {
     }
 
     public void resetPoints(PolygonPoints polygonPoints) {
-        Log.v(TAG, "P1:" + pointer1.getX()+","+pointer1.getY()
-                +"\n"+"P2:" + pointer2.getX()+","+pointer2.getY()
-                +"\n"+"P3:" + pointer3.getX()+","+pointer3.getY()
-                +"\n"+"P4:" + pointer4.getX()+","+pointer4.getY());
+        Log.v(TAG, "P1:" + pointer1.getX() + "," + pointer1.getY()
+                + "\n" + "P2:" + pointer2.getX() + "," + pointer2.getY()
+                + "\n" + "P3:" + pointer3.getX() + "," + pointer3.getY()
+                + "\n" + "P4:" + pointer4.getX() + "," + pointer4.getY());
         pointer1.setX(polygonPoints.getTopLeftPoint().x);
         pointer1.setY(polygonPoints.getTopLeftPoint().y);
 
@@ -189,10 +189,10 @@ public class PolygonView extends FrameLayout {
         pointer4.setY(polygonPoints.getBottomRightPoint().y);
 
         polygonView.invalidate();
-        Log.v(TAG, "P1:" + pointer1.getX()+","+pointer1.getY()
-                +"\n"+"P2:" + pointer2.getX()+","+pointer2.getY()
-                +"\n"+"P3:" + pointer3.getX()+","+pointer3.getY()
-                +"\n"+"P4:" + pointer4.getX()+","+pointer4.getY());
+        Log.v(TAG, "P1:" + pointer1.getX() + "," + pointer1.getY()
+                + "\n" + "P2:" + pointer2.getX() + "," + pointer2.getY()
+                + "\n" + "P3:" + pointer3.getX() + "," + pointer3.getY()
+                + "\n" + "P4:" + pointer4.getX() + "," + pointer4.getY());
     }
 
     @Override
@@ -367,7 +367,7 @@ public class PolygonView extends FrameLayout {
                     latestPoint2 = new PointF(mainPointer2.getX(), mainPointer2.getY());
                     break;
                 case MotionEvent.ACTION_UP:
-                    int color = 0;
+                    int color;
                     if (isValidShape(getPoints()) && isValidPointer1() && isValidPointer2() && isValidPointer3() && isValidPointer4()) {
                         color = getResources().getColor(R.color.crop_color);
                         latestPoint.x = v.getX();
@@ -401,7 +401,7 @@ public class PolygonView extends FrameLayout {
         return super.onTouchEvent(event);
     }
 
-    private boolean isValidShape(Map<Integer, PointF> pointFMap) {
+    private boolean isValidShape(SparseArray<PointF> pointFMap) {
         return pointFMap.size() == 4;
     }
 

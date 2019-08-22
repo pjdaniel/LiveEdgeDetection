@@ -17,10 +17,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionManager;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,8 +45,6 @@ import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 import static android.view.View.GONE;
@@ -133,7 +131,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA:
                 onRequestCamera(grantResults);
@@ -205,7 +203,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
             Mat originalMat = new Mat(copyBitmap.getHeight(), copyBitmap.getWidth(), CvType.CV_8UC1);
             Utils.bitmapToMat(copyBitmap, originalMat);
             ArrayList<PointF> points;
-            Map<Integer, PointF> pointFs = new HashMap<>();
+            SparseArray<PointF> pointFs = new SparseArray<>();
             try {
                 Quadrilateral quad = ScanUtils.detectLargestQuadrilateral(originalMat);
                 if (null != quad) {
@@ -270,7 +268,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
 
     @Override
     public void onClick(View view) {
-        Map<Integer, PointF> points = polygonView.getPoints();
+        SparseArray<PointF> points = polygonView.getPoints();
 
         Bitmap croppedBitmap;
 

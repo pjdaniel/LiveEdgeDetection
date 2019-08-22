@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.hardware.Camera;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Surface;
@@ -33,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import static org.opencv.core.CvType.CV_8UC1;
 import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
@@ -283,9 +283,7 @@ public class ScanUtils {
 
         List<MatOfPoint> largestContour = findLargestContour(mGrayMat);
         if (null != largestContour) {
-            Quadrilateral mLargestRect = findQuadrilateral(largestContour);
-            if (mLargestRect != null)
-                return mLargestRect;
+            return findQuadrilateral(largestContour);
         }
         return null;
     }
@@ -315,7 +313,7 @@ public class ScanUtils {
         Comparator<Point> sumComparator = new Comparator<Point>() {
             @Override
             public int compare(Point lhs, Point rhs) {
-                return Double.valueOf(lhs.y + lhs.x).compareTo(rhs.y + rhs.x);
+                return Double.compare(lhs.y + lhs.x, rhs.y + rhs.x);
             }
         };
 
@@ -323,7 +321,7 @@ public class ScanUtils {
 
             @Override
             public int compare(Point lhs, Point rhs) {
-                return Double.valueOf(lhs.y - lhs.x).compareTo(rhs.y - rhs.x);
+                return Double.compare(lhs.y - lhs.x, rhs.y - rhs.x);
             }
         };
 
@@ -353,7 +351,7 @@ public class ScanUtils {
             Collections.sort(mContourList, new Comparator<MatOfPoint>() {
                 @Override
                 public int compare(MatOfPoint lhs, MatOfPoint rhs) {
-                    return Double.valueOf(Imgproc.contourArea(rhs)).compareTo(Imgproc.contourArea(lhs));
+                    return Double.compare(Imgproc.contourArea(rhs), Imgproc.contourArea(lhs));
                 }
             });
             return mContourList;
@@ -585,7 +583,7 @@ public class ScanUtils {
         return points;
     }
 
-    public static boolean isScanPointsValid(Map<Integer, PointF> points) {
+    public static boolean isScanPointsValid(SparseArray<PointF> points) {
         return points.size() == 4;
     }
 }
