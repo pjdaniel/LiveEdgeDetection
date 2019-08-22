@@ -1,1 +1,1 @@
-include ':app', ':liveedgedetection', ':opencv'
+include ':app', ':liveedgedetection', ':openCVLibrary411'
