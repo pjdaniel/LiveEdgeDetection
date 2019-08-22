@@ -117,7 +117,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
             return;
         }
         if (previewSize == null)
-            previewSize = ScanUtils.getOptimalPreviewSize(camera, vWidth, vHeight);
+            previewSize = camera.getParameters().getPreviewSize();
 
         Camera.Parameters parameters = camera.getParameters();
         camera.setDisplayOrientation(ScanUtils.configureCameraAngle((Activity) context));
