@@ -5,8 +5,6 @@ group = 'com.github.adityaarora1'
 android {
     compileSdkVersion 28
 
-    packageBuildConfig false
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
