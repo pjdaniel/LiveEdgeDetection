@@ -1,8 +1,0 @@
-{
-  "buildFiles": [
-    "/Users/pjdaniel/Documents/git/LiveEdgeDetection/opencv/native/jni/OpenCV.mk"
-  ],
-  "cleanCommands": [],
-  "buildTargetsCommand": "/Users/pjdaniel/Library/Android/sdk/ndk/20.0.5594570/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/pjdaniel/Documents/git/LiveEdgeDetection/opencv/native/jni/OpenCV.mk APP_ABI\u003dx86_64 NDK_ALL_ABIS\u003dx86_64 NDK_DEBUG\u003d1 APP_PLATFORM\u003dandroid-21 NDK_OUT\u003d/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003d/Users/pjdaniel/Documents/git/LiveEdgeDetection/liveedgedetection/build/intermediates/ndkBuild/debug/lib {LIST_OF_TARGETS_TO_BUILD}",
-  "libraries": {}
-}

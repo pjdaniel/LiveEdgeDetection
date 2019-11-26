@@ -17,10 +17,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,9 +38,6 @@ import com.adityaarora.liveedgedetection.view.ProgressDialogFragment;
 import com.adityaarora.liveedgedetection.view.Quadrilateral;
 import com.adityaarora.liveedgedetection.view.ScanSurfaceView;
 
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -48,6 +45,8 @@ import org.opencv.core.Point;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import static android.view.View.GONE;
@@ -64,6 +63,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
     private FrameLayout cameraPreviewLayout;
     private ScanSurfaceView mImageSurfaceView;
     private boolean isPermissionNotGranted;
+    private static final String mOpenCvLibrary = "opencv_java3";
     private static ProgressDialogFragment progressDialogFragment;
     private TextView captureHintText;
     private LinearLayout captureHintLayout;
@@ -75,23 +75,6 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
     private View cropRejectBtn;
     private Bitmap copyBitmap;
     private FrameLayout cropLayout;
-
-    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status) {
-                case LoaderCallbackInterface.SUCCESS: {
-                    Log.i(TAG, "OpenCV loaded successfully");
-                    checkCameraPermissions();
-                }
-                break;
-                default: {
-                    super.onManagerConnected(status);
-                }
-                break;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,18 +106,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
                 mImageSurfaceView.setPreviewCallback();
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (!OpenCVLoader.initDebug()) {
-            // Handle Error
-        } else {
-            Log.d(TAG, "OpenCV library found inside package. Using it!");
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
+        checkCameraPermissions();
     }
 
     private void checkCameraPermissions() {
@@ -161,7 +133,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA:
                 onRequestCamera(grantResults);
@@ -230,10 +202,14 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         try {
             copyBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
+            int height = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getHeight();
+            int width = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getWidth();
+
+            copyBitmap = ScanUtils.resizeToScreenContentSize(copyBitmap, width, height);
             Mat originalMat = new Mat(copyBitmap.getHeight(), copyBitmap.getWidth(), CvType.CV_8UC1);
             Utils.bitmapToMat(copyBitmap, originalMat);
             ArrayList<PointF> points;
-            SparseArray<PointF> pointFs = new SparseArray<>();
+            Map<Integer, PointF> pointFs = new HashMap<>();
             try {
                 Quadrilateral quad = ScanUtils.detectLargestQuadrilateral(originalMat);
                 if (null != quad) {
@@ -292,9 +268,13 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         progressDialogFragment.dismissAllowingStateLoss();
     }
 
+    static {
+        System.loadLibrary(mOpenCvLibrary);
+    }
+
     @Override
     public void onClick(View view) {
-        SparseArray<PointF> points = polygonView.getPoints();
+        Map<Integer, PointF> points = polygonView.getPoints();
 
         Bitmap croppedBitmap;
 
@@ -309,7 +289,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         }
 
         String path = ScanUtils.saveToInternalMemory(croppedBitmap, ScanConstants.IMAGE_DIR,
-                ScanConstants.IMAGE_NAME, ScanActivity.this, 100)[0];
+                ScanConstants.IMAGE_NAME, ScanActivity.this, 90)[0];
         setResult(Activity.RESULT_OK, new Intent().putExtra(ScanConstants.SCANNED_RESULT, path));
         //bitmap.recycle();
         System.gc();

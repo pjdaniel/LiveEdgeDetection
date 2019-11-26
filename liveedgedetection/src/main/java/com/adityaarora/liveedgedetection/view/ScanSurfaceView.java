@@ -117,7 +117,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
             return;
         }
         if (previewSize == null)
-            previewSize = camera.getParameters().getPreviewSize();
+            previewSize = ScanUtils.getOptimalPreviewSize(camera, vWidth, vHeight);
 
         Camera.Parameters parameters = camera.getParameters();
         camera.setDisplayOrientation(ScanUtils.configureCameraAngle((Activity) context));
@@ -130,7 +130,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         }
 
-        Camera.Size size = ScanUtils.getOptimalPictureSize(camera, width, height, parameters.getPreviewSize());
+        Camera.Size size = ScanUtils.determinePictureSize(camera, parameters.getPreviewSize());
         parameters.setPictureSize(size.width, size.height);
         parameters.setPictureFormat(ImageFormat.JPEG);
 
@@ -203,8 +203,8 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
         float previewWidth = (float) stdSize.height;
         float previewHeight = (float) stdSize.width;
 
-        Log.i(TAG, "previewWidth: " + previewWidth);
-        Log.i(TAG, "previewHeight: " + previewHeight);
+        Log.i(TAG, "previewWidth: " + String.valueOf(previewWidth));
+        Log.i(TAG, "previewHeight: " + String.valueOf(previewHeight));
 
         //Points are drawn in anticlockwise direction
         path.moveTo(previewWidth - (float) points[0].y, (float) points[0].x);
@@ -214,7 +214,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
         path.close();
 
         double area = Math.abs(Imgproc.contourArea(approx));
-        Log.i(TAG, "Contour Area: " + area);
+        Log.i(TAG, "Contour Area: " + String.valueOf(area));
 
         PathShape newBox = new PathShape(path, previewWidth, previewHeight);
         Paint paint = new Paint();
@@ -232,8 +232,8 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
         if (bottomWidth > resultWidth)
             resultWidth = bottomWidth;
 
-        Log.i(TAG, "resultWidth: " + resultWidth);
-        Log.i(TAG, "resultHeight: " + resultHeight);
+        Log.i(TAG, "resultWidth: " + String.valueOf(resultWidth));
+        Log.i(TAG, "resultHeight: " + String.valueOf(resultHeight));
 
         ImageDetectionProperties imgDetectionPropsObj
                 = new ImageDetectionProperties(previewWidth, previewHeight, resultWidth, resultHeight,
@@ -279,7 +279,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
         }
         Log.i(TAG, "Preview Area 95%: " + 0.95 * previewArea +
                 " Preview Area 20%: " + 0.20 * previewArea +
-                " Area: " + area +
+                " Area: " + String.valueOf(area) +
                 " Label: " + scanHint.toString());
 
         border.setStrokeWidth(12);
