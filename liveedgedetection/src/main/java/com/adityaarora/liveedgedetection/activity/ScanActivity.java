@@ -202,10 +202,6 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         try {
             copyBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
 
-            int height = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getHeight();
-            int width = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getWidth();
-
-            copyBitmap = ScanUtils.resizeToScreenContentSize(copyBitmap, width, height);
             Mat originalMat = new Mat(copyBitmap.getHeight(), copyBitmap.getWidth(), CvType.CV_8UC1);
             Utils.bitmapToMat(copyBitmap, originalMat);
             ArrayList<PointF> points;
@@ -289,7 +285,7 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
         }
 
         String path = ScanUtils.saveToInternalMemory(croppedBitmap, ScanConstants.IMAGE_DIR,
-                ScanConstants.IMAGE_NAME, ScanActivity.this, 90)[0];
+                ScanConstants.IMAGE_NAME, ScanActivity.this, 100)[0];
         setResult(Activity.RESULT_OK, new Intent().putExtra(ScanConstants.SCANNED_RESULT, path));
         //bitmap.recycle();
         System.gc();

@@ -117,7 +117,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
             return;
         }
         if (previewSize == null)
-            previewSize = ScanUtils.getOptimalPreviewSize(camera, vWidth, vHeight);
+            previewSize = camera.getParameters().getPreviewSize();
 
         Camera.Parameters parameters = camera.getParameters();
         camera.setDisplayOrientation(ScanUtils.configureCameraAngle((Activity) context));
@@ -130,7 +130,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
         }
 
-        Camera.Size size = ScanUtils.determinePictureSize(camera, parameters.getPreviewSize());
+        Camera.Size size = ScanUtils.getOptimalPictureSize(camera, width, height, parameters.getPreviewSize());
         parameters.setPictureSize(size.width, size.height);
         parameters.setPictureFormat(ImageFormat.JPEG);
 
