@@ -1,10 +1,10 @@
-package com.adityaarora.liveedgedetection;
+package com.adityaarora.liveedgedetection.app;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
