@@ -5,6 +5,7 @@ group = 'com.github.pjdaniel'
 
 android {
     compileSdkVersion 31
+    ndkVersion '21.1.6352462'
 
     defaultConfig {
         minSdkVersion 16
