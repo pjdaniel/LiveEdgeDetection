@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
+group = 'com.github.pjdaniel'
 
 android {
     compileSdkVersion 31
@@ -22,5 +25,18 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_11
         sourceCompatibility JavaVersion.VERSION_11
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.pjdaniel'
+                artifactId = 'openCVLibrary347'
+                version = '1.0.0'
+            }
+        }
     }
 }
