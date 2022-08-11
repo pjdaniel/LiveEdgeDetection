@@ -80,7 +80,6 @@ public class ScanUtils {
                 break;
             }
         }
-
         return retSize;
     }
 
@@ -156,8 +155,6 @@ public class ScanUtils {
             size.height = temp;
         }
 
-        Camera.Size requestedSize = camera.new Size(size.width, size.height);
-
         double previewAspectRatio = (double) previewSize.width / (double) previewSize.height;
 
         if (previewAspectRatio < 1.0) {
@@ -173,34 +170,24 @@ public class ScanUtils {
         for (int i = 0; i < supportedSizes.size(); i++) {
             Camera.Size supportedSize = supportedSizes.get(i);
 
-            // Perfect match
-            if (supportedSize.equals(requestedSize)) {
-                Log.d(TAG, "CameraPreview optimalPictureSize " + supportedSize.width + 'x' + supportedSize.height);
-                return supportedSize;
-            }
-
             double difference = Math.abs(previewAspectRatio - ((double) supportedSize.width / (double) supportedSize.height));
 
             if (difference < bestDifference - aspectTolerance) {
                 // better aspectRatio found
-                if ((width != 0 && height != 0) || (supportedSize.width * supportedSize.height < 2048 * 1024)) {
+                if ((width != 0 && height != 0) || (supportedSize.width * supportedSize.height < 6144 * 3072)) {
                     size.width = supportedSize.width;
                     size.height = supportedSize.height;
                     bestDifference = difference;
+                    Log.d(TAG, "CameraPreview considering size A: " + supportedSize.width + 'x' + supportedSize.height);
                 }
             } else if (difference < bestDifference + aspectTolerance) {
                 // same aspectRatio found (within tolerance)
                 if (width == 0 || height == 0) {
-                    // set highest supported resolution below 2 Megapixel
-                    if ((size.width < supportedSize.width) && (supportedSize.width * supportedSize.height < 2048 * 1024)) {
+                    // set highest supported resolution below 6 Megapixel
+                    if ((size.width < supportedSize.width) && (supportedSize.width * supportedSize.height < 6144 * 3072)) {
                         size.width = supportedSize.width;
                         size.height = supportedSize.height;
-                    }
-                } else {
-                    // check if this pictureSize closer to requested width and height
-                    if (Math.abs(width * height - supportedSize.width * supportedSize.height) < Math.abs(width * height - size.width * size.height)) {
-                        size.width = supportedSize.width;
-                        size.height = supportedSize.height;
+                        Log.d(TAG, "CameraPreview considering size B: " + supportedSize.width + 'x' + supportedSize.height);
                     }
                 }
             }

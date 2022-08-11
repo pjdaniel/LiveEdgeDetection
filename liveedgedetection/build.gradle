@@ -46,8 +46,8 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.pjdaniel'
-                artifactId = 'liveEdgeDetection'
-                version = '1.0.7'
+                artifactId = 'LiveEdgeDetection'
+                version = 'v1.0.8'
             }
         }
     }
